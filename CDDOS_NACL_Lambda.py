@@ -115,7 +115,7 @@ def lambda_handler(event, context):
             else:
                 print("Subnet Doesnt Exist in Default ACL")
 
-    # GetIdOfNacl:
+    # GetIdOfNacl info:
     # Recieve: Vpc object ,get all the NACL in the current VPC(vpc_obj.network_acls.all())
     # Function checks
     # Retrun the ACL assoicate id for this subnet
