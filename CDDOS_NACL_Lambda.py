@@ -60,7 +60,7 @@ def lambda_handler(event, context):
             NACL_rule_number += 1
 
     #AddPrefixToip:
-        #Add prefiex /32 to the ip list provided from the customer
+    #Add prefiex /32 to the ip list provided from the customer
     def AddPrefixToip(ip_list):
         new_ip_list = [s + "/32" for s in ip_list]
         return new_ip_list
@@ -88,8 +88,8 @@ def lambda_handler(event, context):
         )
 
     # GetAclAsscociateBySubnetId:
-        # Recieve: Source NACL object which the subnet is located in
-        # Retrun the ACL assoicate id for this subnet
+    # Recieve: Source NACL object which the subnet is located in
+    # Retrun the ACL assoicate id for this subnet
     def GetAclAsscociateBySubnetId(source_acl_asscociate,subnet_id):
         acl_asscociate = source_acl_asscociate.associations
         for index in range(len(acl_asscociate)):
@@ -116,9 +116,9 @@ def lambda_handler(event, context):
                 print("Subnet Doesnt Exist in Default ACL")
 
     # GetIdOfNacl:
-        # Recieve: Vpc object ,get all the NACL in the current VPC(vpc_obj.network_acls.all())
-        # Function checks
-        # Retrun the ACL assoicate id for this subnet
+    # Recieve: Vpc object ,get all the NACL in the current VPC(vpc_obj.network_acls.all())
+    # Function checks
+    # Retrun the ACL assoicate id for this subnet
     def GetIdOfNacl(vpc_obj):
         network_acl_iterator = vpc_obj.network_acls.all()
         for i in network_acl_iterator:
@@ -157,16 +157,15 @@ def lambda_handler(event, context):
 
     Region = context.invoked_function_arn.split(":")[3]
     FunctionName= context.function_name
-
     ec2 = boto3.resource('ec2', region_name='us-east-2')
     prod_nacl = ec2.NetworkAcl(os.environ['prod_nacl_id'])
     subnet_prod_id = os.environ['subnet_id'].split(",")
     vpc = ec2.Vpc(os.environ.get('vpc_id'))
-    #vpc = ec2.Vpc('vpc-07236283060448f8a')
     customer_url = os.environ['customer_url']
     peacetimeIPList = os.environ['customer_ip'].split()
     customer_peace_ip = AddPrefixToip(peacetimeIPList)
     current_customer_ip = AddPrefixToip(GetCurrentAssetIP(customer_url))
+    
     print(current_customer_ip)
     print(customer_peace_ip)
 
