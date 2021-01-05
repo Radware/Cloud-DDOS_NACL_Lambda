@@ -167,7 +167,7 @@ def lambda_handler(event, context):
     Region = context.invoked_function_arn.split(":")[3]
     FunctionName= context.function_name
     
-    ec2 = boto3.resource('ec2', region_name='us-west-2')
+    ec2 = boto3.resource('ec2', region_name=Region)
     prod_nacl = ec2.NetworkAcl(os.environ['prod_nacl_id'])
     subnet_prod_id = os.environ['subnet_id'].split(",")	
     vpc = ec2.Vpc(os.environ.get('vpc_id'))
