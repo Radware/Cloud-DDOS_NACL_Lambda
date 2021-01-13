@@ -157,7 +157,7 @@ def lambda_handler(event, context):
     def UpdateMultipleAclEntries(ports_to_add_list):
         plist = ports_to_add_list.split(",")
         for port in range(len(plist)):
-            if plist[port] == 0:
+            if plist[port] == "0":
                 UpdateAclEntry(nac_id,ip_to_add, NACL_rule_number,int(plist[port]),'1')
             UpdateAclEntry(nac_id,ip_to_add, NACL_rule_number,int(plist[port]),'6')    
 
