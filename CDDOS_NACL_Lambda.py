@@ -159,7 +159,9 @@ def lambda_handler(event, context):
         for port in range(len(plist)):
             if plist[port] == "0":
                 UpdateAclEntry(nac_id,ip_to_add, NACL_rule_number,int(plist[port]),'1')
-            UpdateAclEntry(nac_id,ip_to_add, NACL_rule_number,int(plist[port]),'6')    
+            else:
+                UpdateAclEntry(nac_id,ip_to_add, NACL_rule_number,int(plist[port]),'6')
+
 
         
     ## Main ##
